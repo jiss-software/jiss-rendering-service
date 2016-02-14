@@ -12,8 +12,8 @@ class WatermarkHandler(core.BaseHandler):
         self.logger.info('Request watermark generation for remote file')
 
         name = '/tmp/%s.png' % str(uuid.uuid4())
-        proportion = self.request.headers.get('proportion')
-        text = self.request.headers.get('X-Jiss-Text')
+        proportion = int(self.request.headers.get('proportion', default=1.5))
+        text = self.request.headers.get('X-Jiss-Text', default='Test')
 
         add_watermark(open_remote_image(self.get_query_argument('url')), name, text, proportion)
         self.response_file(name)
@@ -23,8 +23,8 @@ class WatermarkHandler(core.BaseHandler):
     def post(self):
         self.logger.info('Request watermark generation for request file')
 
-        proportion = self.request.headers.get('proportion')
-        text = self.request.headers.get('X-Jiss-Text')
+        proportion = int(self.request.headers.get('proportion', default=1.5))
+        text = self.request.headers.get('X-Jiss-Text', default='Test')
 
         for item in self.request.files.values():
             for file_info in item:
