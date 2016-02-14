@@ -12,7 +12,8 @@ def open_remote_image(url):
 
 
 def open_image(image):
-    return Image.open(image)
+    return Image.open(StringIO(image))
+
 
 def add_watermark(target, out, text, proportion):
     watermark = Image.new("RGBA", target.size)
@@ -25,6 +26,7 @@ def add_watermark(target, out, text, proportion):
     watermark.putalpha(watermark.convert("L").point(lambda x: min(x, 100)))
     target.paste(watermark, None, watermark)
     target.save(out, "PNG")
+
 
 def calculate_font_size(image_size, text, proportion=3):
     size = 1
