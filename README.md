@@ -7,19 +7,19 @@ Usage
 
 Convert web page to PDF:
 
-    /pdf?url=<url>
+    GET:/pdf?url=<url>
 
 Convert web page to IMG:
 
-    /img?url=<url>
+    GET:/img?url=<url>
 
 Add watermark to image:
 
-    /watermark?[proportion=<proportion|1.5>&]text=<text>&url=<url>
+    GET:/watermark?[proportion=<proportion|1.5>&]text=<text>&url=<url>
     
 Resize image:
 
-    /resize?[x=<width|450>&][y=<height|450>&]url=<url>
+    GET:/resize?[x=<width|450>&][y=<height|450>&]url=<url>
     
 Know Issues
 -----------
