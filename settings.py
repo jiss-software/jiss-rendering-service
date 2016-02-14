@@ -12,8 +12,8 @@ define("font_location", default="/usr/share/fonts/truetype/liberation/Liberation
 
 routing = [
     (r"/", HealthCheckHandler),
-    (r"/", ImgHandler),
-    (r"/", PdfHandler),
-    (r"/", ResizeHandler),
-    (r"/", WatermarkHandler)
+    (r"/img", ImgHandler),
+    (r"/pdf", PdfHandler),
+    (r"/resize", ResizeHandler),
+    (r"/watermark", WatermarkHandler)
 ]
