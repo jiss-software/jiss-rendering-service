@@ -12,7 +12,7 @@ class WatermarkHandler(core.BaseHandler):
     def get(self):
         self.logger.info('Request watermark generation for remote file')
 
-        name = 'tmp/%s.png' % str(uuid.uuid4())
+        name = '/tmp/%s.png' % str(uuid.uuid4())
         proportion = self.get_query_argument('proportion', default=1.5)
         text = self.get_query_argument('text', default="Test")
 

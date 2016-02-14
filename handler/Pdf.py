@@ -10,7 +10,7 @@ class PdfHandler(core.BaseHandler):
     def get(self):
         self.logger.info('Request to generate PDF from url')
 
-        name = 'tmp/%s.pdf' % str(uuid.uuid4())
+        name = '/tmp/%s.pdf' % str(uuid.uuid4())
         os.system('wkhtmltopdf %s %s' % (self.get_query_argument('url'), name))
 
         self.response_file(name)

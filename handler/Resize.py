@@ -17,7 +17,7 @@ class ResizeHandler(core.BaseHandler):
 
         size = x if x else 450, y if y else 450
 
-        name = 'tmp/%s.png' % str(uuid.uuid4())
+        name = '/tmp/%s.png' % str(uuid.uuid4())
 
         target = open_remote_image(self.get_query_argument('url'))
         target.thumbnail(size, Image.ANTIALIAS)
