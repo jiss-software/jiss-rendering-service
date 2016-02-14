@@ -7,7 +7,7 @@ Installation
 ### Ubuntu
 
     virtual env
-    chmod +x pre_install.sh && ./pre_install.sh
+    chmod +x pre_install.sh && sudo ./pre_install.sh
     . env/bin/activate
     python setup.py install
 
