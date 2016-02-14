@@ -14,7 +14,7 @@ class WatermarkHandler(core.BaseHandler):
         name = '/tmp/%s.png' % str(uuid.uuid4())
         args = self._get_args()
 
-        add_watermark(open_remote_image(self.get_query_argument('url')), name, args['text'], args['proportion'])
+        add_watermark(open_remote_image(self.get_query_argument('url')), name, args)
         self.response_file(name)
 
     @tornado.web.asynchronous
@@ -28,13 +28,14 @@ class WatermarkHandler(core.BaseHandler):
             for file_info in item:
                 name = '/tmp/%s-%s.pdf' % (time.time(), file_info['filename'])
 
-                add_watermark(open_image(file_info['body']), name, args['text'], args['proportion'])
+                add_watermark(open_image(file_info['body']), name, args)
                 self.response_file(name)
                 return
 
     def _get_args(self):
         args = {
-            'proportion': int(self.request.headers.get('proportion', default=1.5)),
+            'rotate': int(self.request.headers.get('X-Jiss-Rotate', default=45)),
+            'proportion': int(self.request.headers.get('X-Jiss-Proportion', default=1.5)),
             'text': self.request.headers.get('X-Jiss-Text', default='Test')
         }
 

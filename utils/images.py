@@ -15,16 +15,17 @@ def open_image(image):
     return Image.open(StringIO(image))
 
 
-def add_watermark(target, out, text, proportion):
-    watermark = Image.new("RGBA", target.size)
-    selected_font = calculate_font_size(target.size, text, proportion)
+def add_watermark(target, out, args):
+    image = Image.new("RGBA", target.size)
+    selected_font = calculate_font_size(target.size, args['text'], args['proportion'])
 
-    waterdraw = ImageDraw.ImageDraw(watermark, "RGBA")
-    waterdraw.setfont(selected_font)
-    waterdraw.text(calculate_center(selected_font.getsize(text), target.size), text)
+    draw = ImageDraw.ImageDraw(image, "RGBA")
+    draw.setfont(selected_font)
+    draw.text(calculate_center(selected_font.getsize(args['text']), target.size), args['text'])
+    draw.rotate(45)
 
-    watermark.putalpha(watermark.convert("L").point(lambda x: min(x, 100)))
-    target.paste(watermark, None, watermark)
+    image.putalpha(image.convert("L").point(lambda x: min(x, 100)))
+    target.paste(image, None, image)
     target.save(out, "PNG")
 
 
