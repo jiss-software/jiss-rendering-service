@@ -1,7 +1,7 @@
 from tornado.options import define
-from handler import HealthCheckHandler
+from handler import HealthCheckHandler, ImgHandler, PdfHandler, ResizeHandler, WatermarkHandler
 
-define("port", default=33001, help="Application port")
+define("port", default=33005, help="Application port")
 define("max_buffer_size", default=50 * 1024**2, help="")
 define("autoreload", default=False, help="Autoreload server on change")
 
@@ -12,4 +12,8 @@ define("font_location", default="/usr/share/fonts/truetype/liberation/Liberation
 
 routing = [
     (r"/", HealthCheckHandler),
+    (r"/", ImgHandler),
+    (r"/", PdfHandler),
+    (r"/", ResizeHandler),
+    (r"/", WatermarkHandler)
 ]
