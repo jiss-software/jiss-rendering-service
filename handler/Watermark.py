@@ -33,7 +33,11 @@ class WatermarkHandler(core.BaseHandler):
                 return
 
     def _get_args(self):
-        return {
+        args = {
             'proportion': int(self.request.headers.get('proportion', default=1.5)),
             'text': self.request.headers.get('X-Jiss-Text', default='Test')
         }
+
+        self.logger.info('Args: {}', self._dumps(args))
+
+        return args
