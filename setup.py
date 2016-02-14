@@ -16,6 +16,7 @@ setup(
     ],
     install_requires=[
         'tornado==4.2.1',
-        'Pillow'
+        'Pillow',
+        'bson'
     ]
 )
