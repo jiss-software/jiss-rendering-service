@@ -1,4 +1,5 @@
 from PIL import Image
+from PIL import ImageDraw
 from PIL import ImageFont
 from urllib import urlopen
 from cStringIO import StringIO
@@ -7,10 +8,23 @@ from tornado.options import options
 
 def open_remote_image(url):
     url = url if url.startswith("http") else "http://%s" % url
+    return Image.open(StringIO(urlopen(url).read()))
 
-    source = StringIO(urlopen(url).read())
-    return Image.open(source)
 
+def open_image(image):
+    return Image.open(image)
+
+def add_watermark(target, out, text, proportion):
+    watermark = Image.new("RGBA", target.size)
+    selected_font = calculate_font_size(target.size, text, proportion)
+
+    waterdraw = ImageDraw.ImageDraw(watermark, "RGBA")
+    waterdraw.setfont(selected_font)
+    waterdraw.text(calculate_center(selected_font.getsize(text), target.size), text)
+
+    watermark.putalpha(watermark.convert("L").point(lambda x: min(x, 100)))
+    target.paste(watermark, None, watermark)
+    target.save(out, "PNG")
 
 def calculate_font_size(image_size, text, proportion=3):
     size = 1

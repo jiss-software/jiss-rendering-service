@@ -1,9 +1,7 @@
 import core
 import tornado
-from PIL import Image
-from PIL import ImageDraw
 import uuid
-from utils import calculate_center, calculate_font_size, open_remote_image
+from utils import open_remote_image, add_watermark, open_image
 
 
 class WatermarkHandler(core.BaseHandler):
@@ -16,16 +14,24 @@ class WatermarkHandler(core.BaseHandler):
         proportion = self.get_query_argument('proportion', default=1.5)
         text = self.get_query_argument('text', default="Test")
 
-        target = open_remote_image(self.get_query_argument('url'))
-        watermark = Image.new("RGBA", target.size)
-        selected_font = calculate_font_size(target.size, text, proportion)
-
-        waterdraw = ImageDraw.ImageDraw(watermark, "RGBA")
-        waterdraw.setfont(selected_font)
-        waterdraw.text(calculate_center(selected_font.getsize(text), target.size), text)
-
-        watermark.putalpha(watermark.convert("L").point(lambda x: min(x, 100)))
-        target.paste(watermark, None, watermark)
-        target.save(name, "PNG")
-
+        add_watermark(open_remote_image(self.get_query_argument('url')), name, text, proportion)
         self.response_file(name)
+
+    @tornado.web.asynchronous
+    @tornado.gen.coroutine
+    def post(self):
+        self.logger.info('Request watermark generation for request file')
+
+        proportion = self.get_query_argument('proportion', default=1.5)
+        text = self.get_query_argument('text', default="Test")
+
+        for item in self.request.files.values():
+            for file_info in item:
+                name = '/tmp/%s-%s.pdf' % (time.time(), file_info['filename'])
+
+                #with open(name, 'w') as f:
+                #    f.write(file_info['body'])
+
+                add_watermark(open_image(file_info['body']), name, text, proportion)
+                self.response_file(name)
+                return
