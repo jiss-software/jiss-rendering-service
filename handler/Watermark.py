@@ -38,6 +38,6 @@ class WatermarkHandler(core.BaseHandler):
             'text': self.request.headers.get('X-Jiss-Text', default='Test')
         }
 
-        self.logger.info('Args: {}', self._dumps(args))
+        self.logger.info('Args: %s' % self._dumps(args))
 
         return args
