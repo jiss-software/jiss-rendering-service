@@ -35,7 +35,7 @@ class ResizeHandler(core.BaseHandler):
     def _get_args(self):
         # Read arguments
         args = {
-            'resize': self.request.headers.get('X-Jiss-Size', default=None)
+            'resize': self.request.headers.get('X-Jiss-Resize', default=None)
         }
 
         # Parse if needed
