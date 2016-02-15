@@ -34,18 +34,10 @@ class ResizeHandler(core.BaseHandler):
     def _get_args(self):
         # Read arguments
         args = {
-            'angle': int(self.request.headers.get('X-Jiss-Angle', default=45)),
-            'blur': int(self.request.headers.get('X-Jiss-Blur', default=2)),
-            'color': self.request.headers.get('X-Jiss-Color', default=None),
-            'position': self.request.headers.get('X-Jiss-Position', default='center_middle'),
-            'proportion': int(self.request.headers.get('X-Jiss-Proportion', default=1)),
-            'opacity': float(self.request.headers.get('X-Jiss-Opacity', default=0.5)),
-            'text': self.request.headers.get('X-Jiss-Text', default='Test'),
             'resize': self.request.headers.get('X-Jiss-Size', default=None)
         }
 
         # Parse if needed
-        args['color'] = [int(x) for x in args['color'].split(',')] if args['color'] else WHITE
         args['resize'] = [int(x) for x in args['resize'].split('x')] if args['resize'] else None
 
         self.logger.info('Args: %s' % self._dumps(args))
