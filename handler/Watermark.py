@@ -39,8 +39,8 @@ class WatermarkHandler(core.BaseHandler):
             'blur': int(self.request.headers.get('X-Jiss-Blur', default=0)),
             'color': self.request.headers.get('X-Jiss-Color', default=None),
             'position': self.request.headers.get('X-Jiss-Position', default='center_middle'),
-            'proportion': int(self.request.headers.get('X-Jiss-Proportion', default=1)),
-            'opacity': float(self.request.headers.get('X-Jiss-Opacity', default=0.5)),
+            'proportion': float(self.request.headers.get('X-Jiss-Proportion', default=0.9)),
+            'opacity': float(self.request.headers.get('X-Jiss-Opacity', default=0.3)),
             'text': self.request.headers.get('X-Jiss-Text', default='Test'),
             'resize': self.request.headers.get('X-Jiss-Size', default=None)
         }

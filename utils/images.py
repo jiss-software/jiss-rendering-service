@@ -86,10 +86,30 @@ def add_watermark(target, out, args):
     if 'opacity' in args and 0 < args['opacity'] < 1:
         text_layer = set_opacity(text_layer, args['opacity'])
 
-    target.paste(text_layer, location, text_layer)
+    y = int(- text_box_size[1] * 4)
+    x = int(- text_box_size[0])
 
-    if 'resize' in args and args['resize']:
-        target.thumbnail(args['resize'], Image.ANTIALIAS)
+    if target.size[0] > target.size[1]:
+        while True:
+            while True:
+                target.paste(text_layer, (x, 0), text_layer)
+                x = int(x + text_box_size[0] / 3)
+
+                if x > target.size[0]:
+                    break
+
+            y = int(y + font_size * 2)
+
+            if y > target.size[1]:
+                break
+    else:
+        while True:
+            target.paste(text_layer, (location[0], y), text_layer)
+
+            y = int(y + font_size * 2)
+
+            if y > target.size[1]:
+                break
 
     target.save(out, "PNG")
 
@@ -128,7 +148,7 @@ def calculate_position(text_size, image_size, loaction='center_middle'):
     y = 0
 
     if hloc == 'center':
-        x = (image_size[0] - text_size[0]) / 3
+        x = (image_size[0] - text_size[0]) / 2
     elif hloc == 'right':
         x = image_size[0] - text_size[0]
 
