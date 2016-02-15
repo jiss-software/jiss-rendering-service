@@ -36,7 +36,7 @@ class WatermarkHandler(core.BaseHandler):
         # Read arguments
         args = {
             'angle': int(self.request.headers.get('X-Jiss-Angle', default=45)),
-            'blur': int(self.request.headers.get('X-Jiss-Blur', default=2)),
+            'blur': int(self.request.headers.get('X-Jiss-Blur', default=0)),
             'color': self.request.headers.get('X-Jiss-Color', default=None),
             'position': self.request.headers.get('X-Jiss-Position', default='center_middle'),
             'proportion': int(self.request.headers.get('X-Jiss-Proportion', default=1)),
