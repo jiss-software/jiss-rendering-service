@@ -41,13 +41,15 @@ class WatermarkHandler(core.BaseHandler):
             'position': self.request.headers.get('X-Jiss-Position', default='center_middle'),
             'proportion': float(self.request.headers.get('X-Jiss-Proportion', default=0.9)),
             'opacity': float(self.request.headers.get('X-Jiss-Opacity', default=0.3)),
-            'text': self.request.headers.get('X-Jiss-Text', default='Test'),
-            'resize': self.request.headers.get('X-Jiss-Size', default=None)
+            'text': self.request.headers.get('X-Jiss-Text', default='Demo'),
+            'resize': self.request.headers.get('X-Jiss-Resize', default=None),
+            'repeat': self.request.headers.get('X-Jiss-Repeat', default=None)
         }
 
         # Parse if needed
         args['color'] = [int(x) for x in args['color'].split(',')] if args['color'] else WHITE
         args['resize'] = [int(x) for x in args['resize'].split('x')] if args['resize'] else None
+        args['repeat'] = args['repeat'] and args['repeat'] in ['True', 'true']
 
         self.logger.info('Args: %s' % self._dumps(args))
 

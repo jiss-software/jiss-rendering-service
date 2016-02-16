@@ -50,11 +50,11 @@ Usage
     POST:/resize
     BODY: <IMG_FILE>
 
-#### Additional options:
+By default image will be scaled to 1024x1024, with current aspect ratio.
 
-* `x=<width|450>>`
-* `y=<height|450>`
-* `proportions=<true/false>`
+#### Options in header:
+
+* `'X-Jiss-Resize: 1024x1024` - Change size.
     
 Know Issues
 -----------
