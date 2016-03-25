@@ -13,9 +13,9 @@ RUN apt-get -y install libjpeg8 libjpeg62-dev libfreetype6 libfreetype6-dev font
 
 RUN apt-get -y install xfonts-75dpi
 
-RUN wget http://download.gna.org/wkhtmltopdf/0.12/${WKHTMLTOX}/wkhtmltox-${WKHTMLTOX}_linux-generic-amd64.tar.xz
-RUN tar -xf wkhtmltox-${WKHTMLTOX}_linux-generic-amd64.tar.xz
-RUN rm wkhtmltox-${WKHTMLTOX}_linux-generic-amd64.tar.xz
+ADD http://download.gna.org/wkhtmltopdf/0.12/${WKHTMLTOX}/wkhtmltox-${WKHTMLTOX}_linux-generic-amd64.tar.xz wkhtmltox.tar.xz
+RUN tar -xf wkhtmltox.tar.xz
+RUN rm wkhtmltox.tar.xz
 
 RUN cp wkhtmltox/bin/* /usr/bin/
 RUN rm -rf wkhtmltox
