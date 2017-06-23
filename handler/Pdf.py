@@ -3,17 +3,7 @@ import tornado
 import os
 import uuid
 
-
-class PdfHandler(core.BaseHandler):
-    @tornado.web.asynchronous
-    @tornado.gen.coroutine
-    def get(self):
-        self.logger.info('Request to generate PDF from url')
-
-        name = '/tmp/pdf-%s.pdf' % str(uuid.uuid4())
-        os.system('wkhtmltopdf %s %s' % (self.get_query_argument('url'), name))
-
-        'grayscale %s' % '-g'
+# 'grayscale %s' % '-g'
 # -O, --orientation <orientation>     Set orientation to Landscape or Portrait
 # -s, --page-size <Size>              Set paper size to: A4, Letter, etc.
 # -page-height <unitreal>        Page height
@@ -39,6 +29,16 @@ class PdfHandler(core.BaseHandler):
 # ratio none constant (default)
 # --zoom <float>                  Use this zoom factor (default 1)
 
+
+class PdfHandler(core.BaseHandler):
+    @tornado.web.asynchronous
+    @tornado.gen.coroutine
+    def get(self):
+        self.logger.info('Request to generate PDF from url')
+
+        name = '/tmp/pdf-%s.pdf' % str(uuid.uuid4())
+        os.system('wkhtmltopdf %s %s' % (self.get_query_argument('url'), name))
+
         self.response_file(name)
 
     def _get_args(self):
@@ -53,8 +53,6 @@ class PdfHandler(core.BaseHandler):
             'text': self.request.headers.get('X-Jiss-Text', default='Demo'),
             'resize': self.request.headers.get('X-Jiss-Resize', default=None),
             'repeat': self.request.headers.get('X-Jiss-Repeat', default=None)
-
-
 
             # -B, --margin-bottom <unitreal>      Set the page bottom margin
             # -L, --margin-left <unitreal>        Set the page left margin (default 10mm)

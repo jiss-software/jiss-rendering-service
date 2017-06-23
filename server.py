@@ -1,4 +1,3 @@
-import tornado.ioloop
 import tornado.web
 import logging
 from settings import routing

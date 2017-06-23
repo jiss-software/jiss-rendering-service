@@ -59,13 +59,13 @@ def add_watermark(target, out, args):
     else:
         font_size = int(args['font_size'])
 
-    print "Target size (%s;%s)" % target.size
+    print("Target size (%s;%s)" % target.size)
 
     # Get text layer
     text_size = get_text_size(args['text'], font_size, args['angle'])
     text_box_size = get_text_size(args['text'], font_size)
 
-    print "Text size: %s rotated to %s" % (text_box_size, text_size)
+    print("Text size: %s rotated to %s" % (text_box_size, text_size))
 
     text_layer = get_text(text_box_size, font_size, args['text'])
 
@@ -76,7 +76,7 @@ def add_watermark(target, out, args):
     # Fill with color
     location = calculate_position(text_size, target.size, args['position'])
 
-    print "Location (%s;%s)" % location
+    print("Location (%s;%s)" % location)
 
     text_layer = draw_to_rgba_layer(target.size, args['color'], text_layer, (0, 0))
 
