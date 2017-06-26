@@ -10,7 +10,7 @@ define("max_buffer_size", default=50 * 1024**2, help="")
 define("autoreload", default=False, help="Autoreload server on change")
 
 define("log_dir", default="/var/log", help="Logger directory")
-define("log_file", default="jiss-tornado-template.log", help="Logger file name")
+define("log_file", default="rendering-service.log", help="Logger file name")
 
 define("font_location", default="/usr/share/fonts/truetype/liberation/LiberationSerif-Bold.ttf", help="")
 

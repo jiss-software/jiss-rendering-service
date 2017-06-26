@@ -1,6 +1,7 @@
 ### Project
 *.sh
 log
+tmp
 
 ### Documentation
 *.md
