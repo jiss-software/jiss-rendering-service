@@ -3,6 +3,8 @@ import logging
 from settings import routing
 from tornado.options import options
 import os
+import subprocess
+import datetime
 
 tornado.options.parse_command_line()
 
@@ -14,6 +16,9 @@ logging.basicConfig(
     filename='%s/%s' % (options.log_dir, options.log_file),
     level=logging.DEBUG
 )
+
+version = subprocess.check_output(['cat', '/etc/hostname']).strip()
+started = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
 ioLoop = tornado.ioloop.IOLoop.current()
 app = tornado.web.Application(routing, autoreload=options.autoreload)

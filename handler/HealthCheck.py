@@ -10,4 +10,7 @@ class HealthCheckHandler(core.BaseHandler):
 
         self.response_json({
             'status': True,
+            'components': {},
+            'version': self.settings['version'],
+            'started': self.settings['started']
         })
